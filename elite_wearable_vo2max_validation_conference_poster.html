@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELITE: Wearable VO2max Validation - Conference Poster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Configure and Load MathJax for High-Quality LaTeX Rendering -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* CSS resets and base styles */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        /* Exact Poster Size: 44 inches wide by 34 inches high.
+           This tiles perfectly into a 4x4 grid of 11" x 8.5" Landscape Letter sheets.
+        */
+        body {
+            background-color: #e9ecef;
+            font-family: 'DM Sans', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .poster-board {
+            width: 44in;
+            height: auto;
+            min-height: 34in;
+            padding-bottom: 1in;
+            background-color: #f8f9fa;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background-image: radial-gradient(circle at 90% 10%, rgba(140, 21, 21, 0.05) 0%, transparent 40%);
+        }
+
+        /* Top Header Area */
+        .poster-header {
+            background-color: #8C1515; /* Stanford Red */
+            color: white;
+            padding: 0.8in 1.5in;
+            text-align: center;
+            flex-shrink: 0;
+            border-bottom: 10px solid #D2C295; /* Accent gold */
+            overflow: hidden;
+        }
+
+        .poster-header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 85px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            font-weight: 700;
+            white-space: nowrap; /* Prevent line wraps on digital/full view */
+        }
+
+        .poster-header .subtitle {
+            font-size: 44px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: #f1f1f1;
+            white-space: nowrap; /* Prevent line wraps on digital/full view */
+        }
+
+        .poster-header .authors {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            white-space: nowrap; /* Prevent line wraps on digital/full view */
+        }
+
+        .poster-header .affiliations {
+            font-size: 26px;
+            color: #e0e0e0;
+            white-space: nowrap; /* Prevent line wraps on digital/full view */
+        }
+
+        /* 2-Column CSS Grid for Balanced Text and Massive Tables */
+        .poster-content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8in;
+            padding: 0.8in 1in;
+            align-items: start; /* Prevents cards from stretching vertically */
+            flex-grow: 1;
+        }
+
+        /* Grid Spanning Classes */
+        .col-span-2 { grid-column: span 2; } /* Takes up 100% of the poster width */
+
+        /* Section Cards */
+        .section-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-top: 14px solid #8C1515;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-card h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 48px;
+            color: #8C1515;
+            border-bottom: 4px solid #D2C295;
+            padding-bottom: 12px;
+            margin-bottom: 10px;
+        }
+
+        .section-card p, .section-card li {
+            font-size: 32px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .section-card ul {
+            padding-left: 40px;
+        }
+        
+        .section-card li {
+            margin-bottom: 18px;
+        }
+
+        /* Highlight Boxes for Key Information */
+        .highlight-box {
+            background-color: rgba(210, 194, 149, 0.2); /* Soft Stanford Gold */
+            border-left: 8px solid #8C1515; /* Stanford Red */
+            padding: 24px 30px;
+            border-radius: 0 10px 10px 0;
+            margin: 20px 0;
+        }
+
+        .highlight-box.primary {
+            background-color: rgba(140, 21, 21, 0.08); /* Soft Stanford Red */
+            border-left: 8px solid #8C1515;
+        }
+
+        .highlight-box p {
+            font-size: 34px;
+            line-height: 1.5;
+            color: #222;
+            margin: 0;
+        }
+
+        .highlight-box strong {
+            color: #8C1515;
+            font-size: 36px;
+        }
+
+        /* Images Container */
+        .image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            max-height: 25in; /* Increased max-height to ensure full-width tables scale up without capping */
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+
+        /* Print Instructions - Bypass laptop memory crashes by auto-formatting to 8.5x11s! */
+        @media print {
+            @page {
+                size: letter landscape; /* Native 11 x 8.5 inches */
+                margin: 0.4in;
+            }
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            .poster-board {
+                width: 100%;
+                height: auto;
+                min-height: 0;
+                box-shadow: none;
+                background-image: none;
+                display: block; /* Disables the giant grid for printing */
+            }
+            .poster-header {
+                padding: 0.5in;
+                border-radius: 16px;
+                page-break-after: always;
+                break-after: page;
+                -webkit-print-color-adjust: exact; /* Forces Chrome to print the red background */
+                print-color-adjust: exact;
+            }
+            /* Scale down header fonts so they fit perfectly on 11x8.5 paper in exactly one line */
+            .poster-header h1 { 
+                font-size: 26px; 
+                margin-bottom: 12px; 
+                white-space: nowrap; 
+            }
+            .poster-header .subtitle { 
+                font-size: 18px; 
+                margin-bottom: 12px; 
+                line-height: 1.3; 
+                white-space: nowrap; 
+            }
+            .poster-header .authors { 
+                font-size: 14px; 
+                margin-bottom: 8px; 
+                white-space: nowrap; 
+            }
+            .poster-header .affiliations { 
+                font-size: 12px; 
+                white-space: nowrap; 
+            }
+
+            .poster-content {
+                display: block;
+                padding: 0;
+                gap: 0;
+            }
+            .section-card {
+                width: 100%;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                page-break-after: always; /* Forces exactly 1 card per sheet for easy pinning */
+                break-after: page;
+                margin-bottom: 0;
+                box-shadow: none;
+                border: 2px solid #eee; /* Adds a light border for visual pinning boundaries */
+                border-top: 14px solid #8C1515;
+                padding: 30px;
+                min-height: 7.5in; /* Stretches the card to look nice on the printed sheet */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .image-container img {
+                max-height: 6.8in; /* Maximum safe height to preserve aspect ratio on Landscape Letter */
+                width: auto;
+                max-width: 100%;
+                box-shadow: none;
+            }
+            /* Slightly scale down fonts so they fit comfortably on standard physical paper */
+            .section-card p, .section-card li { font-size: 24px; }
+            .section-card h2 { font-size: 38px; }
+            .highlight-box p { font-size: 26px; }
+            .highlight-box strong { font-size: 28px; }
+            .highlight-box {
+                background-color: transparent !important; /* Save printer ink */
+                border: 2px solid #8C1515;
+                border-left: 8px solid #8C1515;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="poster-board">
+        <header class="poster-header">
+            <h1>Can Wearables Track the Edge of Human Performance?</h1>
+            <div class="subtitle">Validating $VO_2\text{max}$ in High-Capacity Endurance Athletes</div>
+            <div class="authors">Alexander Tolas, Mikael Mattsson, Anders Johnson, Malene E. Lindholm, Euan A. Ashley</div>
+            <div class="affiliations">Cardiovascular Medicine, Stanford University | Wu Tsai Human Performance Alliance</div>
+        </header>
+
+        <main class="poster-content">
+            
+            <!-- Row 1: Intro & Methods (Half-width each for wide, readable text) -->
+            <div class="section-card">
+                <h2>Introduction</h2>
+                <ul>
+                    <li>$VO_2\text{max}$ is a central physiological marker of endurance performance and aerobic fitness.</li>
+                    <li>While wearable devices commonly estimate $VO_2\text{max}$, their algorithms are rarely validated in elite endurance athletes operating near the upper limits of human aerobic capacity.</li>
+                </ul>
+                <div class="highlight-box">
+                    <p><strong>Objective:</strong> To characterize the agreement, bias, and limitations of wearable $VO_2\text{max}$ estimates compared to laboratory-measured values in a high-performing cohort.</p>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h2>Methods</h2>
+                <ul>
+                    <li>The ELITE Study recruits endurance athletes with exceptionally high aerobic capacity ($VO_2\text{max} > 55\text{ mL/kg/min}$ for women, $> 65\text{ mL/kg/min}$ for men).</li>
+                    <li>This analysis included 227 athletes with paired $VO_2\text{max}$ data from a wearable device and laboratory cardiopulmonary exercise testing (CPX).</li>
+                    <li>Wearable estimates were compared against CPX values using Pearson correlation for linear association and Bland-Altman analysis to evaluate mean bias and limits of agreement.</li>
+                </ul>
+            </div>
+
+            <!-- Row 2: Massive Full-Width Tables (With redundant headers removed) -->
+            <div class="section-card col-span-2">
+                <div class="image-container">
+                    <img src="table_1.png" alt="Table 1. Sample Characteristics Stratified by Sex">
+                </div>
+            </div>
+
+            <div class="section-card col-span-2">
+                <div class="image-container">
+                    <img src="table_2.png" alt="Validation of Wearable-Derived VO2max Estimates">
+                </div>
+            </div>
+
+            <!-- Row 3: Plots (Half-width each, redundant headers removed) -->
+            <div class="section-card">
+                <div class="image-container">
+                    <img src="agreement.jpg" alt="Agreement Plot">
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="image-container">
+                    <img src="bland-altman.png" alt="Bland-Altman Analysis">
+                </div>
+            </div>
+
+            <!-- Row 4: Conclusions & Future Work (Half-width each) -->
+            <div class="section-card">
+                <h2>Conclusion</h2>
+                <div class="highlight-box primary">
+                    <p><strong>Key Finding:</strong> Wearables systematically underestimate $VO_2\text{max}$ in high-level athletes, exhibiting a mean bias of $-3.7\text{ mL/kg/min}$ and wide limits of agreement.</p>
+                </div>
+                <ul>
+                    <li>Device-specific agreement varied across manufacturers, though interpretation is currently limited by small sample sizes for certain devices.</li>
+                    <li>Individual-level wearable estimates should be interpreted with extreme caution in high-aerobic-capacity populations.</li>
+                    <li>Laboratory CPX testing remains the necessary standard when precise aerobic metrics are required.</li>
+                </ul>
+            </div>
+            
+            <div class="section-card">
+                <h2>Future Work</h2>
+                <ul>
+                    <li>Expand cohort diversity across sex, race, sport type, and overall $VO_2\text{max}$ range to strengthen device-specific comparisons.</li>
+                    <li>Evaluate algorithm sensitivity to changes in fitness over time.</li>
+                    <li>Investigate algorithm performance across different classification levels of aerobic fitness.</li>
+                    <li>Develop custom prediction algorithms optimized for elite endurance athletes.</li>
+                </ul>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>
